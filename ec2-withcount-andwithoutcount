@@ -1,0 +1,27 @@
+# Provider configuration
+provider "aws" {
+  region = "ap-south-1"  
+}
+# EC2 instance creation with count variable
+resource "aws_instance" "first-instance" {
+  count         = 2
+  ami           = "ami-02a2af70a66af6dfb"  
+  instance_type = "t2.micro"     
+
+  tags = {
+    Name = "EC2-Instance-${count.index + 1}"
+  }
+}
+
+
+
+# EC2 instances creation without count variable
+resource "aws_instance" "ec2_instances_no_count" {
+  ami           = "ami-02a2af70a66af6dfb"  
+  instance_type = "t2.micro"    
+  count         = 2
+
+  tags = {
+    Name = "EC2-Instance-No-Count"
+  }
+}
